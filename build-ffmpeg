@@ -624,6 +624,22 @@ if build "zimg" "3.0.3"; then
 fi
 CONFIGURE_OPTIONS+=("--enable-libzimg")
 
+
+
+if build "zeromq" "4.3.4"; then
+  download "https://github.com/zeromq/libzmq/releases/download/v4.3.4/zeromq-4.3.4.tar.gz" "zeromq-4.3.4.tar.gz"
+
+  execute ./configure --prefix="${WORKSPACE}" --enable-static --disable-shared
+  execute make -j $MJOBS
+  execute make install
+  execute libtool --finish ${WORKSPACE}/lib
+
+  build_done "zeromq" "4.3.4"
+fi
+CONFIGURE_OPTIONS+=("--enable-libzmq")
+
+
+
 ##
 ## audio library
 ##
